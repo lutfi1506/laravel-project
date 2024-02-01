@@ -12,22 +12,12 @@
       </form>
    </div>
 </div>
-{{-- @dd($pembelianChart) --}}
+<a href="/history/create" class="btn btn-primary mb-3 ">create new history</a>
 @if($lists->count() !== 0 )
-<div class="container">
-   <div class="row">
-      <div class="col-4">
-         <div class="card" >
-            {!! $pembelianChart->container() !!}
-         </div>
-      </div>
-   </div>
-</div>
-    
-
 <table class="table table-success table-striped text-center table-bordered">
    <thead class="table-dark">
       <tr>
+         <th>No</th>
          <th>Tanggal</th>
          <th>ID Pulsa</th>
          <th>No HP</th>
@@ -38,13 +28,15 @@
    <tbody >
       @foreach ($lists as $list)
       <tr>
+         <td> {{ $lists->firstItem() + $loop->index }} </td>
          <td>{{ $list->tanggal }}</td>
          <td>{{ $list->paket->kode }}</td>
          <td>{{ $list->no_hp }}</td>
          <td>{{ $list->nama }}</td>
          <td>
-            <a href="history/detail/{{ $list->id }}">detail</a>
-            <a href="history/delete/{{ $list->id }}">delete</a>
+            <a href="history/{{ $list->id }}" class="badge bg-info"><span data-feather="eye"></span></a>
+            <a href="history/edit/{{ $list->id }}" class="badge bg-warning"><span data-feather="edit"></span></a>
+            <a href="history/delete/{{ $list->id }}" class="badge bg-danger"><span data-feather="x-circle"></span></a>
          </td>
       </tr>
       @endforeach
@@ -58,6 +50,4 @@
       {{ $lists->links() }}
    </div>
 </div>
-<script src="{{ $pembelianChart->cdn() }}"></script>
-{{ $pembelianChart->script() }}
 @endsection

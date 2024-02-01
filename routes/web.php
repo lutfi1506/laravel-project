@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HistoryController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\HutangsController;
@@ -23,12 +24,9 @@ use PhpParser\Node\Expr\List_;
 Route::get('/',[HomeController::class,'index'])->middleware('auth');
 
 
-Route::get('/history', [HistoryController::class, 'index'])->middleware('auth');
-Route::get('/history/detail/{list}',[HistoryController::class,'detail']);
+Route::resource('/history',HistoryController::class)->middleware('auth');
 
-Route::get('/dashboard',function(){
-   return view('dashboard.index');
-})->middleware('auth');
+Route::get('/dashboard',[DashboardController::class,'index'])->middleware('auth');
 
 Route::get('/hutang',[HutangsController::class,'index'])->middleware('auth');
 Route::get('/hutang/{hutang:slug}',[HutangsController::class,'list']);

@@ -1,19 +1,23 @@
-<div class="sidebar offcanvas-md offcanvas-start col-md-3 col-lg-2 bg-body-tertiary d-flex flex-column flex-shrink-0 p-3" tabindex="-1" id="sidebar">
+<div class="sidebar offcanvas-md offcanvas-end col-md-3 col-lg-2 bg-body-tertiary d-flex flex-column flex-shrink-0 p-3" tabindex="-1" id="sidebar">
    <div class="offcanvas-header fs-5">
       Lutfi web
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#sidebar" aria-label="Close"></button>
    </div>
    <ul class="nav nav-pills flex-column mb-auto">
       <li class="nav-item">
-         <a href="/" class="nav-link {{ ($title == "Home")? 'active' : '' }}" aria-current="page">Home</a>
+         <a href="/" class="nav-link {{ Request::is('/') ? 'active' : '' }}" aria-current="page">Home</a>
       </li>
       <li>
-         <a href="/history" class="nav-link {{ ($title == "History")? 'active' : '' }}">History</a>
+         <a href="/history" class="nav-link {{ Request::is('history*') ? 'active' : '' }}">History</a>
       </li>
       <li>
-         <a href="/paket" class="nav-link {{ ($title == "Daftar Paket")? 'active' : '' }}">Products</a>
+         <a href="/paket" class="nav-link {{ Request::is('paket') ? 'active' : '' }}">Products</a>
       </li>
       <li>
-         <a href="/hutang" class="nav-link {{ ($title == "Daftar Hutang")? 'active' : '' }}">Hutang</a>
+         <a href="/hutang" class="nav-link {{ Request::is('hutang') ? 'active' : '' }}">Hutang</a>
+      </li>
+      <li>
+         <a href="/dashboard" class="nav-link {{ Request::is('dashboard') ? 'active' : '' }}">Dashboard</a>
       </li>
    </ul>
    <hr>

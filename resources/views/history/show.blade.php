@@ -2,7 +2,7 @@
 
 @section('container')
 <div class="row justify-content-center">
-   <div class="col-md-6 col-lg4"> 
+   <div class="col-md-6 col-lg-4"> 
       <div class= "card shadow mt-3 ">
          <div class="card-header bg-dark text-white p-2">
             <h2 class="text-center">Detail</h2>

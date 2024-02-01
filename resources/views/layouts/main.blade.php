@@ -8,12 +8,12 @@
    <link rel="stylesheet" href="{{ asset('/css/mystyle.css') }}">
    <title>{{ $title }}</title>
 </head>
-<body>
+<body class="bg-body-secondary">
    @include('partials.navbar')
    <div class="blank"></div>
    <main class="d-flex">
       @include('partials.sidebar')
-      <div class="main col bg-body-secondary pt-3">
+      <div class="main col  pt-3">
          <div class="container">
             @yield('container')
          </div>
@@ -21,7 +21,11 @@
    </main>
    <script src="/js/popper.min.js"></script>
    <script src="/js/bootstrap.min.js"></script>
-   {{-- <script src="/js/chart.min.js"></script> --}}
+   <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+   <script>
+      feather.replace();
+   </script>
    <script src="/js/myjs.js"></script>
+   <!-- choose one -->
 </body>
 </html>
