@@ -17,9 +17,9 @@ return new class extends Migration
             $table->date('tanggal');
             $table->string('no_hp');
             $table->string('nama');
-            $table->boolean('status');
-            $table->foreignId('hutangs_id');
-            $table->integer('single_hutang');
+            $table->boolean('status')->default(false);
+            $table->foreignId('hutangs_id')->nullable();
+            $table->integer('single_hutang')->nullable();
             $table->timestamps();
         });
     }

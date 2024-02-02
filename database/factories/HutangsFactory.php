@@ -17,7 +17,6 @@ class HutangsFactory extends Factory
     public function definition(): array
     {
         return [
-            "slug" => $this->faker->slug(),
             "nama" => $this->faker->name()
         ];
     }

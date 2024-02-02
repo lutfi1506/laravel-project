@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('hutangs', function (Blueprint $table) {
             $table->id();
-            $table->string("slug")->unique();
             $table->string("nama");
             $table->timestamps();
         });

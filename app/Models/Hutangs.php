@@ -10,6 +10,8 @@ class Hutangs extends Model
 {
     use HasFactory;
 
+    protected $guarded = ['id'];
+
     public function list(): HasMany{
         return $this->hasMany(History::class);
     }

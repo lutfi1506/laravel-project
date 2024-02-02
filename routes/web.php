@@ -29,7 +29,7 @@ Route::resource('/history',HistoryController::class)->middleware('auth');
 Route::get('/dashboard',[DashboardController::class,'index'])->middleware('auth');
 
 Route::get('/hutang',[HutangsController::class,'index'])->middleware('auth');
-Route::get('/hutang/{hutang:slug}',[HutangsController::class,'list']);
+Route::get('/hutang/{hutang:id}',[HutangsController::class,'list']);
 
 Route::get('/paket', [PaketsController::class, 'index'])->middleware('auth');
 

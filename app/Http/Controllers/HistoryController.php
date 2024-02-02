@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\History;
+use App\Models\Hutangs;
+use App\Models\Paket;
 use Illuminate\Http\Request;
 
 class HistoryController extends Controller
@@ -23,8 +25,9 @@ class HistoryController extends Controller
      */
     public function create()
     {
-        return view('history.create',[
-            "title" => "Create New History"
+        return view('history.create', [
+            "title" => "Create History",
+            "pakets" => Paket::all()
         ]);
     }
 
@@ -33,7 +36,25 @@ class HistoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // return $request;
+        $validatedData = $request->validate([
+            'paket_id' => 'required',
+            'tanggal' => 'required|date',
+            'no_hp' => 'required|min:10|max:15|',
+            'nama' => 'required',
+            'hutang' => 'integer',
+        ]);
+        if ($request->status) {
+            $validatedHutang = $request->validate([
+                'nama' => 'required',
+                'status' => 'boolean',
+
+            ]);
+            Hutangs::create($validatedHutang);
+        }
+        History::create($validatedData);
+
+        return redirect('/history')->with('succes', 'New History has been added!');
     }
 
     /**
@@ -41,7 +62,7 @@ class HistoryController extends Controller
      */
     public function show(History $history)
     {
-        return view('history.show',[
+        return view('history.show', [
             "title" => "Detail History",
             "lists" => $history
         ]);

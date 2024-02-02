@@ -26,6 +26,5 @@
       feather.replace();
    </script>
    <script src="/js/myjs.js"></script>
-   <!-- choose one -->
 </body>
 </html>

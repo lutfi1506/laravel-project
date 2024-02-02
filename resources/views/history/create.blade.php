@@ -1,23 +1,75 @@
 @extends('layouts.main')
-
 @section('container')
-<h2 class="my-3">Create New History</h2>
-<div class="col-lg-8">
-   <form>
-      <div class="mb-3">
-         <label for="exampleInputEmail1" class="form-label">Email address</label>
-         <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-         <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
-      </div>
-      <div class="mb-3">
-         <label for="exampleInputPassword1" class="form-label">Password</label>
-         <input type="password" class="form-control" id="exampleInputPassword1">
-      </div>
+   <h2> Create New History</h2>
+   <div class="row">
+      <div class="col-lg-8">
+         <form method="POST" action="/history">
+            @csrf
+            <div class="row">
+               
+               <div class="col-6 col-md-4 mb-3">
+                  <label for="id" class="form-label">ID Pulsa</label>
+                  <select class="form-select" name="paket_id" id="id">
+                     @foreach ($pakets as $paket)
+                     <option value="{{ $paket->id }}">{{ $paket->kode }}</option>
+                     @endforeach
+                  </select>
+               </div>
+               <div class="col-6 col-md-4 mb-3">
+                  <label for="date" class="form-label">Date</label>
+                  <input type="date" name="tanggal" class="form-control @error('tanggal') is-invalid @enderror" id="date" required value="{{ old('tanggal') }}">
+                  @error('tanggal')
+                  <div class="invalid-feedback">
+                     {{ $message }}
+                  </div>
+                  @enderror
+               </div>
+               <div class="col-md-4 mb-3">
+                  <label for="nohp" class="form-label">No Hp</label>
+                  <input type="number" name="no_hp" class="form-control @error('no_hp') is-invalid @enderror" id="nohp" required value="{{ old('no_hp') }}">
+                  @error('no_hp')
+                  <div class="invalid-feedback">
+                     {{ $message }}
+                  </div>
+                  @enderror
+               </div>
+               <div class="col-md-6 mb-3">
+                  <label for="name" class="form-label">Name</label>
+                  <input type="text" name="nama" class="form-control @error('nama') is-invalid @enderror" id="name" required value="{{ old('nama') }}">
+                  @error('nama')
+                  <div class="invalid-feedback">
+                     {{ $message }}
+                  </div>
+                  @enderror
+               </div>
+               <div class="col-md-6 mb-3">
+                  <label for="hutang" class="form-label">Hutang</label>
+                  <input type="text" id="disabled" name="hutang" class="form-control @error('hutang') is-invalid @enderror" aria-label="disabled" id="hutang" disabled>
+                  @error('hutang')
+                  <div class="invalid-feedback">
+                     {{ $message }}
+                  </div>
+                  @enderror
+               </div>
+            </div>
+      
       <div class="mb-3 form-check">
-         <input type="checkbox" class="form-check-input" id="exampleCheck1">
-         <label class="form-check-label" for="exampleCheck1">Check me out</label>
+         <input type="checkbox" class="form-check-input" id="checkbox" name="status" value="1">
+         <label class="form-check-label" for="checkbox">not yet paid</label>
       </div>
       <button type="submit" class="btn btn-primary">Submit</button>
    </form>
-</div>
+      </div>
+   </div>
+   <script>
+      const input = document.getElementById('disabled');
+      const checkbox = document.getElementById('checkbox');
+      checkbox.addEventListener('click',function(){
+         if(checkbox.checked){
+            input.disabled = false;
+         }else{
+            input.disabled = true;
+         }
+      })
+   </script>
 @endsection
