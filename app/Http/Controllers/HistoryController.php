@@ -43,12 +43,11 @@ class HistoryController extends Controller
             'no_hp' => 'required|min:10|max:15|',
             'nama' => 'required',
             'hutang' => 'integer',
+            'status' => 'boolean',
         ]);
         if ($request->status) {
             $validatedHutang = $request->validate([
                 'nama' => 'required',
-                'status' => 'boolean',
-
             ]);
             Hutangs::create($validatedHutang);
         }

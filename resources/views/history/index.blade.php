@@ -14,7 +14,9 @@
 </div>
 <a href="/history/create" class="btn btn-primary mb-3 ">create new history</a>
 @if($lists->count() !== 0 )
-<table class="table table-success table-striped text-center table-bordered">
+<div class="row">
+   <div class="col">
+      <table class="table table-success table-striped text-center table-bordered">
    <thead class="table-dark">
       <tr>
          <th>No</th>
@@ -42,6 +44,8 @@
       @endforeach
    </tbody>
 </table>
+   </div>
+</div>
 @else
 
 @endif

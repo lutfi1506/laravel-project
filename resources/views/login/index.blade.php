@@ -23,9 +23,9 @@
                <input type="email" name="email" class="form-control rounded-top @error('email') is-invalid @enderror" id="email" autofocus placeholder="email" required value="{{ old('email') }}">
                <label for="email">Email address</label>
                @error('email')
-                   <div class="invalid-feedback">
+                  <div class="invalid-feedback">
                      {{ $message }}
-                   </div>
+                  </div>
                @enderror
             </div>
             <div class="form-floating text-body-secondary">
