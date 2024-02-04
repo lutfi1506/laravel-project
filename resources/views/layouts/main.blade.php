@@ -21,10 +21,5 @@
    </main>
    <script src="/js/popper.min.js"></script>
    <script src="/js/bootstrap.min.js"></script>
-   <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
-   <script>
-      feather.replace();
-   </script>
-   <script src="/js/myjs.js"></script>
 </body>
 </html>

@@ -12,6 +12,11 @@ class Hutangs extends Model
 
     protected $guarded = ['id'];
 
+    public static function search($field,$search)
+    {
+        return Hutangs::where($field, '=',$search);
+    }
+
     public function list(): HasMany{
         return $this->hasMany(History::class);
     }

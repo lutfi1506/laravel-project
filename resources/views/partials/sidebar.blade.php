@@ -1,6 +1,6 @@
 <div class="sidebar offcanvas-md offcanvas-end col-md-3 col-lg-2 bg-body-tertiary d-flex flex-column flex-shrink-0 p-3" tabindex="-1" id="sidebar">
    <div class="offcanvas-header fs-5">
-      Lutfi web
+      Pulsaku
       <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#sidebar" aria-label="Close"></button>
    </div>
    <ul class="nav nav-pills flex-column mb-auto">

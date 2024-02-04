@@ -13,6 +13,11 @@
    </div>
 </div>
 <a href="/history/create" class="btn btn-primary mb-3 ">create new history</a>
+@if (session()->has('success'))
+    <div class="alert alert-success" role="alert">
+      {{ session('success') }}
+    </div>
+@endif
 @if($lists->count() !== 0 )
 <div class="row">
    <div class="col">
@@ -37,8 +42,12 @@
          <td>{{ $list->nama }}</td>
          <td>
             <a href="history/{{ $list->id }}" class="badge bg-info"><span data-feather="eye"></span></a>
-            <a href="history/edit/{{ $list->id }}" class="badge bg-warning"><span data-feather="edit"></span></a>
-            <a href="history/delete/{{ $list->id }}" class="badge bg-danger"><span data-feather="x-circle"></span></a>
+            <a href="history/{{ $list->id }}/edit" class="badge bg-warning"><span data-feather="edit"></span></a>
+            <form action="history/{{ $list->id }}" method="POST" class="d-inline">
+               @method('delete')
+               @csrf
+               <button class="badge bg-danger" onclick="return confirm('are you sure')"><span data-feather="x-circle"></span></button>
+            </form>
          </td>
       </tr>
       @endforeach

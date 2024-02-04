@@ -16,7 +16,7 @@ class HistoryController extends Controller
     {
         return view('history.index', [
             "title" => "History",
-            "lists" => History::with(['paket', 'hutang'])->latest()->filter(request(['search']))->paginate(10)->withQueryString()
+            "lists" => History::with(['paket'])->latest()->filter(request(['search']))->paginate(10)->withQueryString()
         ]);
     }
 
@@ -27,7 +27,7 @@ class HistoryController extends Controller
     {
         return view('history.create', [
             "title" => "Create History",
-            "pakets" => Paket::all()
+            "pakets" => Paket::all(),
         ]);
     }
 
@@ -36,24 +36,27 @@ class HistoryController extends Controller
      */
     public function store(Request $request)
     {
-        // return $request;
+        $search = Hutangs::search('nama',$request->nama)->get();
         $validatedData = $request->validate([
             'paket_id' => 'required',
             'tanggal' => 'required|date',
             'no_hp' => 'required|min:10|max:15|',
             'nama' => 'required',
-            'hutang' => 'integer',
+            'single_hutang' => 'integer',
             'status' => 'boolean',
         ]);
-        if ($request->status) {
-            $validatedHutang = $request->validate([
-                'nama' => 'required',
-            ]);
-            Hutangs::create($validatedHutang);
+        if($request->status) {
+            if($search->count() <= 0){
+                Hutangs::create($request->nama);
+                $id = Hutangs::search('nama', $request->nama)->get()[0]->id;
+            }else{
+                $id = $search[0]->id;
+            }
+            $validatedData['hutangs_id'] = $id; 
         }
         History::create($validatedData);
 
-        return redirect('/history')->with('succes', 'New History has been added!');
+        return redirect('/history')->with('success', 'New History has been added!');
     }
 
     /**
@@ -72,7 +75,11 @@ class HistoryController extends Controller
      */
     public function edit(History $history)
     {
-        //
+        return view('history.edit', [
+            "title" => "Edit History",
+            "pakets" => Paket::all(),
+            "history" => $history
+        ]);
     }
 
     /**
@@ -88,6 +95,7 @@ class HistoryController extends Controller
      */
     public function destroy(History $history)
     {
-        //
+        History::destroy($history->id);
+        return redirect('/history')->with('success', 'History has been deleted!');
     }
 }
