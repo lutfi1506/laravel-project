@@ -23,7 +23,8 @@ class HistoryFactory extends Factory
             "nama" => $this->faker->name(),
             "status" => true,
             "hutangs_id" => mt_rand(1,3),
-            "single_hutang" => $this->faker->numerify('#000')
+            "single_hutang" => $this->faker->numerify('#000'),
+            "created_by" => $this->faker->name(),
         ];
     }
 }

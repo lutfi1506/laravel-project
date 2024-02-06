@@ -17,7 +17,7 @@ class PaketFactory extends Factory
     public function definition(): array
     {
         return [
-            "kode" => 'xa'. $this->faker->randomElement([5,10,15,20,25,50,100]),
+            "kode" => 'XA'. $this->faker->randomElement([5,10,15,20,25,50,100]),
             "harga" => $this->faker->randomElement([8000,13000,18000,23000,28000,53000,103000]),
             "jenis" => "pulsa",
             "deskripsi" => "pulsa Axis"

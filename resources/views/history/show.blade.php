@@ -7,56 +7,42 @@
          <div class="card-header bg-dark text-white p-2">
             <h2 class="text-center">Detail</h2>
          </div>
-         <div class="card-footer bg-primary-subtle bg-gradient fs-5">
-            <div class="row">
-               <div class="col text-end">
-                  Tanggal :
-               </div>
-               <div class="col">
-                  {{ $lists->tanggal }}
-               </div>
+         <div class="card-body bg-primary-subtle bg-gradient">
+                  <table class="fs-5 mx-auto">
+                     <tr>
+                        <th>tanggal</th>
+                        <td>:</td>
+                        <td>{{ $lists->tanggal }}</td>
+                     </tr>
+                     <tr>
+                        <th>Name</th>
+                        <td>:</td>
+                        <td>{{ $lists->nama }}</td>
+                     </tr>
+                     <tr>
+                        <th>No Hp</th>
+                        <td>:</td>
+                        <td>{{ $lists->no_hp }}</td>
+                     </tr>
+                     <tr>
+                        <th>Id Pulsa</th>
+                        <td>:</td>
+                        <td>{{ $lists->paket->kode }}</td>
+                     </tr>
+                     <tr>
+                        <th>Harga</th>
+                        <td>:</td>
+                        <td>{{ $lists->paket->harga }}</td>
+                     </tr>
+                     <tr>
+                        <th>Status</th>
+                        <td>:</td>
+                        <td>{{ (!$lists->status)?'lunas': '- '.$lists->single_hutang }}</td>
+                     </tr>
+                  </table>
+               <a href="/history" class="btn btn-danger mt-3 btn-sm float-start">Kembali</a>
+               <p class="mt-3 float-end text-sm text-body-secondary">Created By : {{ $lists->created_by }}</p>
             </div>
-            <div class="row">
-               <div class="col text-end">
-                  No hp :
-               </div>
-               <div class="col">
-                  {{ $lists->no_hp }}
-               </div>
-            </div>
-            <div class="row">
-               <div class="col text-end">
-                  nama :
-               </div>
-               <div class="col">
-                  {{ $lists->nama }}
-               </div>
-            </div>
-            <div class="row">
-               <div class="col text-end">
-                  ID Pulsa :
-               </div>
-               <div class="col">
-                  {{ $lists->paket->kode }}
-               </div>
-            </div>
-            <div class="row">
-               <div class="col text-end">
-                  Harga :
-               </div>
-               <div class="col">
-                  {{ $lists->paket->harga }}
-               </div>
-            </div>
-            <div class="row">
-               <div class="col text-end">
-                  Jenis Paket :
-               </div>
-               <div class="col">
-                  {{ $lists->paket->jenis }}
-               </div>
-            </div>
-            <a href="/history" class="btn btn-danger btn-sm mt-3">Kembali</a>
          </div>
          </div>
    </div>

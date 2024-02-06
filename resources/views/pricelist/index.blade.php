@@ -1,18 +1,52 @@
 @extends('layouts.main')
 
 @section('container')
-<div class="row justify-content-center">
-   <h2 class="my-3 d-flex col-md-8">history</h2>
-   <div class="col-md-4">
-      <form action="">
-         <div class="input-group my-3">
-            <input type="text" class="form-control" placeholder="Search..." name="search">
-            <button class="btn btn-dark" type="submit">Search</button>
+
+<div class="row">
+   <div class="col">
+      <h2 class="text-center p-3">Price List</h2>
+      <a href="/pricelist/create" class="btn btn-primary mb-3 ">create new pricelist</a>
+      @if (session()->has('success'))
+         <div class="alert alert-success" role="alert">
+            {{ session('success') }}
          </div>
-      </form>
+      @endif
+      <table class="table table-success table-striped text-center table-bordered">
+         <thead class="table-dark">
+            <tr>
+               <th>ID Paket</th>
+               <th>Harga</th>
+               <th>Jenis</th>
+               <th>Deskripsi</th>
+               <th>Aksi</th>
+            </tr>
+         </thead>
+         <tbody >
+            @foreach ($pakets as $paket)
+            <tr>
+               <td>{{ $paket->kode }}</td>
+               <td>{{ $paket->harga }}</td>
+               <td>{{ $paket->jenis }}</td>
+               <td>{{ $paket->deskripsi }}</td>
+               <td>
+                  <a href="pricelist/{{ $paket->id }}/edit" class="badge bg-warning"><span data-feather="edit"></span></a>
+                  <form action="pricelist/{{ $paket->id }}" method="POST" class="d-inline-block text-center">
+                     @method('delete')
+                     @csrf
+                     <button class="badge bg-danger" onclick="return confirm('are you sure')"><span data-feather="x-circle"></span></button>
+                  </form>
+               </td>
+            </tr>
+            @endforeach
+         </tbody>
+      </table>
    </div>
 </div>
-<a href="/history/create" class="btn btn-primary mb-3 ">create new history</a>
+@endsection
+
+
+
+{{-- <a href="/history/create" class="btn btn-primary mb-3 ">create new history</a>
 @if (session()->has('success'))
     <div class="alert alert-success" role="alert">
       {{ session('success') }}
@@ -65,4 +99,4 @@
       {{ $lists->links() }}
    </div>
 </div>
-@endsection
+@endsection --}}

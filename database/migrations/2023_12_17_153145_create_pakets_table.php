@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string("kode",12)->unique();
             $table->integer("harga");
-            $table->enum("jenis", ["pulsa","dana","ovo","", "kuota","token"]);
+            $table->string("jenis");
             $table->string("deskripsi");
             $table->timestamps();
         });

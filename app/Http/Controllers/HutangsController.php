@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 class HutangsController extends Controller
 {
     public function index(){
+        Hutangs::cek();
         return view('hutang.index',[
             "title" => "Daftar Hutang",
             "hutangs" => Hutangs::latest()->get()
