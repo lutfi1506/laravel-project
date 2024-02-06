@@ -10,6 +10,8 @@ class Hutangs extends Model
 {
     use HasFactory;
 
+    
+
     protected $guarded = ['id'];
 
     public static function search($field,$search)
@@ -19,5 +21,13 @@ class Hutangs extends Model
 
     public function list(): HasMany{
         return $this->hasMany(History::class);
+    }
+    public static function cek()
+    {
+        foreach(Hutangs::all() as $hutang){
+            if ($hutang->list->count() == 0) {
+                Hutangs::destroy($hutang->id);
+            }
+        }
     }
 }

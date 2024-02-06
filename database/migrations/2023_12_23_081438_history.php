@@ -20,6 +20,7 @@ return new class extends Migration
             $table->boolean('status')->default(false);
             $table->foreignId('hutangs_id')->nullable();
             $table->integer('single_hutang')->nullable();
+            $table->string('created_by','30');
             $table->timestamps();
         });
     }

@@ -3,7 +3,8 @@
    <h2> Create New History</h2>
    <div class="row">
       <div class="col-lg-8">
-         <form method="POST" action="/history">
+         <form method="POST" action="/history/{{ $history->id }}">
+            @method('put')
             @csrf
             <div class="row">
                
@@ -46,8 +47,20 @@
                   </div>
                   @enderror
                </div>
+               <div class="col-md-4 mb-3">
+                  <label for="disabled" class="form-label">Hutang</label>
+                  <input type="number" id="disabled" name="single_hutang" class="form-control @error('hutang') is-invalid @enderror" aria-label="disabled" id="hutang" value="{{ old('single_hutang',$history->single_hutang) }}" required disabled>
+                  @error('single_hutang')
+                  <div class="invalid-feedback">
+                     {{ $message }}
+                  </div>
+                  @enderror
+               </div>
             </div>
-      
+            <div class="mb-3 form-check">
+               <input type="checkbox" class="form-check-input" {{ ($history->status) ? 'checked' : ''  }} id="checkbox" name="status" value="1">
+               <label class="form-check-label" for="checkbox">not yet paid</label>
+            </div>
       <button type="submit" class="btn btn-primary">Submit</button>
    </form>
       </div>
@@ -57,13 +70,17 @@
       const select = document.getElementById('disabled-select');
 
       const checkbox = document.getElementById('checkbox');
+      if(checkbox.checked){
+            input.disabled = false;
+         }else{
+            input.disabled = true;
+         }
       checkbox.addEventListener('click',function(){
          if(checkbox.checked){
             input.disabled = false;
-            select.disabled = false;
+            
          }else{
             input.disabled = true;
-            select.disabled = true;
          }
       })
    </script>

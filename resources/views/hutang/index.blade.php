@@ -1,6 +1,7 @@
 @extends('layouts.main')
 
 @section('container')
+
 <div class="row">
    <div class="col-md-4 text-center mx-auto">
       <h2>Hutang</h2>

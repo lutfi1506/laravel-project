@@ -32,7 +32,7 @@ class DatabaseSeeder extends Seeder
         // ]);
 
         Paket::factory(3)->create();
-        History::factory(20)->create();
+        History::factory(10)->create();
         Hutangs::factory(3)->create();
     }
 }

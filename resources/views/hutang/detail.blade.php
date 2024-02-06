@@ -8,7 +8,6 @@
          <thead class="table-dark">
             <tr>
                <th>No</th>
-               <th>Action</th>
                <th>Tanggal</th>
                <th>Hutang</th>
             </tr>
@@ -17,10 +16,6 @@
             @foreach ($hutang->list as $list)
                 <tr>
                    <td>{{ $loop->iteration }}</td>
-                   <td>
-                      <a class="badge text-decoration-none bg-warning" href="">edit</a>
-                      <a class="badge text-decoration-none bg-primary" href="">delete</a>
-                   </td>
                   <td>{{ $list->tanggal }}</td>
                   <td>{{ $list->single_hutang }}</td>
                 </tr>
@@ -28,7 +23,7 @@
          </tbody>
          <tfoot>
             <tr>
-               <td colspan="3">Jumlah</td>
+               <td colspan="2">Jumlah</td>
                <td>{{ $hutang->list->sum('single_hutang') }}</td>
             </tr>
          </tfoot>

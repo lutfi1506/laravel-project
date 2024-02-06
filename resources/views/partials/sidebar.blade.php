@@ -11,7 +11,7 @@
          <a href="/history" class="nav-link {{ Request::is('history*') ? 'active' : '' }}">History</a>
       </li>
       <li>
-         <a href="/paket" class="nav-link {{ Request::is('paket') ? 'active' : '' }}">Products</a>
+         <a href="/pricelist" class="nav-link {{ Request::is('pricelist*') ? 'active' : '' }}">Pricelist</a>
       </li>
       <li>
          <a href="/hutang" class="nav-link {{ Request::is('hutang') ? 'active' : '' }}">Hutang</a>
@@ -24,7 +24,7 @@
    <div class="dropdown">
       <a href="#" class="d-flex align-items-center text-dark text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
         <img src="https://github.com/mdo.png" alt="" width="35" height="35" class="rounded-circle me-2">
-        <strong>mdo</strong>
+        <strong>{{ Auth::user()->name }}</strong>
       </a>
       <ul class="dropdown-menu dropdown-menu-dark text-small shadow" style="">
          <li><a class="dropdown-item" href="#">New project...</a></li>

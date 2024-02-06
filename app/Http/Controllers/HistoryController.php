@@ -6,6 +6,9 @@ use App\Models\History;
 use App\Models\Hutangs;
 use App\Models\Paket;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
+use function Laravel\Prompts\search;
 
 class HistoryController extends Controller
 {
@@ -16,7 +19,7 @@ class HistoryController extends Controller
     {
         return view('history.index', [
             "title" => "History",
-            "lists" => History::with(['paket'])->latest()->filter(request(['search']))->paginate(10)->withQueryString()
+            "lists" => History::with(['paket','hutang'])->latest()->filter(request(['search']))->paginate(10)->withQueryString()
         ]);
     }
 
@@ -47,14 +50,16 @@ class HistoryController extends Controller
         ]);
         if($request->status) {
             if($search->count() <= 0){
-                Hutangs::create($request->nama);
+                Hutangs::create($validatedData);
                 $id = Hutangs::search('nama', $request->nama)->get()[0]->id;
             }else{
                 $id = $search[0]->id;
             }
             $validatedData['hutangs_id'] = $id; 
         }
+        $validatedData['created_by'] = Auth::user()->name;
         History::create($validatedData);
+
 
         return redirect('/history')->with('success', 'New History has been added!');
     }
@@ -87,7 +92,32 @@ class HistoryController extends Controller
      */
     public function update(Request $request, History $history)
     {
-        //
+        $search = Hutangs::search('nama', $request->nama)->get();
+        $validatedData = $request->validate([
+            'paket_id' => 'required',
+            'tanggal' => 'required|date',
+            'no_hp' => 'required|min:10|max:15|',
+            'nama' => 'required',
+            'single_hutang' => 'integer',
+            'status' => 'boolean',
+        ]);
+        if ($request->status) {
+            if ($search->count() == 0) {
+                Hutangs::create($validatedData);
+                $id = Hutangs::search('nama', $request->nama)->get()[0]->id;
+            } else {
+                $id = $search[0]->id;
+            }
+            $validatedData['hutangs_id'] = $id;
+        }else{
+            $validatedData['status'] = false;
+            $validatedData['single_hutang'] = null;
+            $validatedData['hutangs_id'] = null;
+        }
+        History::where('id',$history->id)
+            ->update($validatedData);
+
+        return redirect('/history')->with('success', 'History has been updated!');
     }
 
     /**
